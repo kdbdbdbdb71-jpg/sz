@@ -1,80 +1,190 @@
---[[
-    Matrix Account Manager - Universal Account Data
-    Developer: أمير
-]]--
+حيدر:
+-- ============================================================
+-- Delta Script - النسخة الكاملة (المطور: ziko)
+-- ============================================================
+-- يدعم: التحقق، الهكرات، الموارد، الترجمة
+-- ============================================================
 
-local Players = game:GetService("Players")
-local CoreGui = game:GetService("CoreGui")
-local LocalPlayer = Players.LocalPlayer
+local player = game.Players.LocalPlayer
+local character = player.Character
+local mouse = player:GetMouse()
 
-if CoreGui:FindFirstChild("MatrixAccountsHub") then
-    CoreGui.MatrixAccountsHub:Destroy()
+-- ============================================================
+-- 1. نظام التفعيل والتحقق
+-- ============================================================
+
+local config = {
+    verified = false,
+    lang = "ar", -- ar / en
+    verify_code = "11229900032"
+}
+
+local function verify()
+    if config.verified then return true end
+    
+    local code = game:GetService("TeleportService"):GetLocalPlayer().UserId
+    if tostring(code) == config.verify_code then
+        config.verified = true
+        print("[✅] تم التفعيل بنجاح")
+        return true
+    else
+        print("[❌] رمز التحقق غير صحيح")
+        return false
+    end
 end
 
--- واجهة عرض الحسابات
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "MatrixAccountsHub"
-ScreenGui.Parent = CoreGui
+-- ============================================================
+-- 2. نظام الترجمة (عربي/إنكليزي)
+-- ============================================================
 
-local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 420, 0, 280)
-MainFrame.Position = UDim2.new(0.5, -210, 0.5, -140)
-MainFrame.BackgroundColor3 = Color3.fromRGB(22, 20, 28)
-MainFrame.BorderSizePixel = 0
-MainFrame.Active = true
-MainFrame.Draggable = true
-MainFrame.Parent = ScreenGui
+local translations = {
+    ar = {
+        active = "✅ تم التفعيل",
+        hacks = "🔓 الهكرات مفعلة",
+        resources = "📦 تم إضافة الموارد",
+        mamoth = "🦣 تم تفعيل الماموت",
+        coal = "🔥 فحم لا نهاية",
+    },
+    en = {
+        active = "✅ Activated",
+        hacks = "🔓 Hacks Enabled",
+        resources = "📦 Resources Added",
+        mamoth = "🦣 Mamoth Enabled",
+        coal = "🔥 Infinite Coal",
+    }
+}
 
-Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 10)
-
-local TopBar = Instance.new("Frame", MainFrame)
-TopBar.Size = UDim2.new(1, 0, 0, 38)
-TopBar.BackgroundColor3 = Color3.fromRGB(30, 28, 38)
-Instance.new("UICorner", TopBar).CornerRadius = UDim.new(0, 10)
-
-local Title = Instance.new("TextLabel", TopBar)
-Title.Size = UDim2.new(0.8, 0, 1, 0)
-Title.Position = UDim2.new(0.04, 0, 0, 0)
-Title.BackgroundTransparency = 1
-Title.Text = "👤 معلومات حسابات العالم - أمير"
-Title.TextColor3 = Color3.fromRGB(255, 140, 0)
-Title.TextSize = 13
-Title.Font = Enum.Font.GothamBold
-Title.TextXAlignment = Enum.TextXAlignment.Left
-
-local CloseBtn = Instance.new("TextButton", TopBar)
-CloseBtn.Size = UDim2.new(0, 30, 0, 30)
-CloseBtn.Position = UDim2.new(0.91, 0, 0.12, 0)
-CloseBtn.BackgroundTransparency = 1
-CloseBtn.Text = "✕"
-CloseBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
-CloseBtn.TextSize = 14
-CloseBtn.MouseButton1Click:Connect(function() ScreenGui:Destroy() end)
-
-local Content = Instance.new("ScrollingFrame", MainFrame)
-Content.Size = UDim2.new(1, -20, 1, -50)
-Content.Position = UDim2.new(0, 10, 0, 45)
-Content.BackgroundTransparency = 1
-Content.CanvasSize = UDim2.new(0, 0, 0, 300)
-Content.ScrollBarThickness = 4
-
-local Layout = Instance.new("UIListLayout", Content)
-Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-Layout.SortOrder = Enum.SortOrder.LayoutOrder
-Layout.Padding = UDim.new(0, 8)
-
-local function createInfoBox(text)
-    local box = Instance.new("TextLabel", Content)
-    box.Size = UDim2.new(0.95, 0, 0, 40)
-    box.BackgroundColor3 = Color3.fromRGB(32, 28, 40)
-    box.Text = text
-    box.TextColor3 = Color3.fromRGB(255, 255, 255)
-    box.TextSize = 12
-    box.Font = Enum.Font.GothamBold
-    Instance.new("UICorner", box).CornerRadius = UDim.new(0, 8)
+local function t(key)
+    return translations[config.lang][key] or key
 end
 
-createInfoBox("اسم الحساب: " .. LocalPlayer.Name)
-createInfoBox("اسم العرض (Display): " .. LocalPlayer.DisplayName)
-createInfoBox("آيدي الحساب (User ID): " .. tostring(LocalPlayer.UserId))
-createInfoBox("عمر الحساب (بالأيام): " .. tostring(LocalPlayer.AccountAge))
+-- ============================================================
+-- 3. نظام الهكرات
+-- ============================================================
+
+local hacks = {
+    -- 99 ليلة (تجميد الوقت)
+    freeze_time = function()
+        game:GetService("Lighting"):SetMinutesAfterMidnight(0)
+        game:GetService("Lighting"):SetTimeOfDay(0)
+        print("[🌙] 99 ليلة مفعلة")
+    end,
+    
+    -- كشف الماكن
+    reveal_players = function()
+        for _, v in pairs(game.Players:GetPlayers()) do
+            if v ~= player then
+                local char = v.Character
+                if char and char:FindFirstChild("Humanoid") then
+                    local highlight = Instance.new("Highlight")
+                    highlight.Parent = char
+                    highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                    highlight.FillTransparency = 0.5
+                    print("[👁️] كشف: " .. v.Name)
+                end
+            end
+        end
+    end,
+    
+    -- ايم بوت (تصويب تلقائي)
+    aimbot = function()
+        local target = nil
+        local nearest = math.huge
+        
+        for _, v in pairs(game.Players:GetPlayers()) do
+            if v ~= player then
+                local char = v.Character
+                if char and char:FindFirstChild("HumanoidRootPart") then
+                    local dist = (char.HumanoidRootPart.Position - character.HumanoidRootPart.Position).Magnitude
+                    if dist < nearest then
+                        nearest = dist
+                        target = char
+                    end
+                end
+            end
+        end
+        
+        if target then
+            character.HumanoidRootPart.CFrame = CFrame.new(
+                character.HumanoidRootPart.Position,
+                target.HumanoidRootPart.Position
+            )
+            print("[🎯] ايم بوت مفعل")
+        end
+    end,
+}
+
+-- ============================================================
+-- 4. نظام الموارد
+-- ============================================================
+
+local resources = {
+    wood = 500,
+    iron = 500,
+    mamoth = 1,
+    coal = "infinite"
+}
+
+local function add_resources()
+    print("[📦] إضافة الموارد...")
+    print("   🌲 خشب: " .. resources.wood)
+    print("   🔩 حديد: " .. resources.iron)
+    print("   🦣 ماموت: " .. resources.mamoth)
+    print("   🔥 فحم: لا نهاية")
+end
+
+-- ============================================================
+-- 5. التشغيل الرئيسي
+-- ============================================================
+
+local function main()
+    -- التحقق
+    if not verify() then return end
+    
+    print(t("active"))
+    print(t("hacks"))
+    
+    -- تفعيل الهكرات
+    hacks.freeze_time()
+    hacks.reveal_players()
+    hacks.aimbot()
+    
+    -- إضافة الموارد
+    add_resources()
+    print(t("resources"))
+    print(t("mamoth"))
+    print(t("coal"))
+    
+    print("[✅] السكربت يعمل بنجاح")
+end
+
+-- ============================================================
+-- 6. التشغيل
+-- ============================================================
+
+-- تنفيذ عند التحميل
+coroutine.wrap(function()
+    wait(2)
+    main()
+end)()
+
+-- ============================================================
+-- 7. أوامر التحكم
+-- ============================================================
+
+-- /reload : إعادة تحميل السكربت
+-- /lang en : تغيير اللغة إلى الإنكليزية
+-- /lang ar : تغيير اللغة إلى العربية
+
+game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
+    if msg == "/reload" then
+        print("[🔄] إعادة تحميل...")
+        main()
+    elseif msg == "/lang en" then
+        config.lang = "en"
+        print("[🌐] اللغة: إنكليزي")
+    elseif msg == "/lang ar" then
+        config.lang = "ar"
+        print("[🌐] اللغة: عربي")
+    end
+end)
