@@ -1,21 +1,13 @@
 --[[
-    Luxy Hub Loader - M A T R I X Edition
+    Luxy Hub Loader - M A T R I X Edition (Direct Execution)
     Developer: أمير
 ]]--
 
-local HttpService = game:GetService("HttpService")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
--- تعديل بيانات التحميل لتظهر باسم الماتريكس
-local HubName = "Matrix Hub"
-local OriginalScript = game:HttpGet("https://www.luxyhub.space/api/loader/luxyhub")
-
--- طباعة رسالة الترحيب باسم المطور أمير
+-- إرسال إشعار أو طباعة اسم الماتريكس
 print("--------------------------------------------------")
-print("🔥 تم تحميل " .. HubName .. " بنجاح!")
+print("🔥 Matrix Hub - مدمج بنجاح!")
 print("👤 المطور: أمير | Matrix")
 print("--------------------------------------------------")
 
--- تشغيل السكربت الأصلي كاملاً دون تغيير أي وظيفة فيه
-loadstring(OriginalScript)()
+-- تحميل وتشغيل السكربت الأصلي مباشرة مع الحفاظ على كافة الوظائف دون أي تغيير
+loadstring(game:HttpGet("https://www.luxyhub.space/api/loader/luxyhub"))()
