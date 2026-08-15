@@ -1,76 +1,50 @@
+-- سكربت عدم الموت (God Mode) - تصميم أمير
 local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
 local LocalPlayer = Players.LocalPlayer
-local Camera = workspace.CurrentCamera
-local Workspace = workspace
 
--- حالات التشغيل
-local AimbotEnabled = false
-local AutoFarmEnabled = false
+local GodModeEnabled = false
 
--- إنشاء الواجهة الرئيسية
+-- إنشاء زر تحكم خاص بعدم الموت
 local ScreenGui = Instance.new("ScreenGui")
+local GodBtn = Instance.new("TextButton")
+
 ScreenGui.Parent = game.CoreGui
-ScreenGui.Name = "AmirHackGui"
+ScreenGui.Name = "GodModeGui"
 
-local Frame = Instance.new("Frame")
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-Frame.Position = UDim2.new(0.1, 0, 0.1, 0)
-Frame.Size = UDim2.new(0, 200, 0, 150)
-Frame.Active = true
-Frame.Draggable = true
+GodBtn.Parent = ScreenGui
+GodBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+GodBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
+GodBtn.Position = UDim2.new(0.1, 0, 0.35, 0)
+GodBtn.Size = UDim2.new(0, 190, 0, 50)
+GodBtn.Font = Enum.Font.SourceSansBold
+GodBtn.Text = "عدم الموت: [❌]"
+GodBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+GodBtn.TextSize = 16
+GodBtn.Active = true
+GodBtn.Draggable = true
 
--- زر الإيم بوت
-local AimbotBtn = Instance.new("TextButton")
-AimbotBtn.Parent = Frame
-AimbotBtn.Size = UDim2.new(0, 180, 0, 50)
-AimbotBtn.Position = UDim2.new(0.05, 0, 0.1, 0)
-AimbotBtn.Text = "Aimbot [❌]"
-AimbotBtn.MouseButton1Click:Connect(function()
-    AimbotEnabled = not AimbotEnabled
-    AimbotBtn.Text = AimbotEnabled and "Aimbot [✔️]" or "Aimbot [❌]"
-end)
-
--- زر تجميع الخشب
-local WoodBtn = Instance.new("TextButton")
-WoodBtn.Parent = Frame
-WoodBtn.Size = UDim2.new(0, 180, 0, 50)
-WoodBtn.Position = UDim2.new(0.05, 0, 0.6, 0)
-WoodBtn.Text = "تجميع الخشب [❌]"
-WoodBtn.MouseButton1Click:Connect(function()
-    AutoFarmEnabled = not AutoFarmEnabled
-    WoodBtn.Text = AutoFarmEnabled and "تجميع الخشب [✔️]" or "تجميع الخشب [❌]"
-end)
-
--- وظيفة الإيم بوت
-RunService.RenderStepped:Connect(function()
-    if not AimbotEnabled then return end
-    local closest, dist = nil, math.huge
-    for _, v in pairs(Players:GetPlayers()) do
-        if v ~= LocalPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-            local pos, onScreen = Camera:WorldToViewportPoint(v.Character.HumanoidRootPart.Position)
-            if onScreen then
-                local mag = (Vector2.new(pos.X, pos.Y) - UserInputService:GetMouseLocation()).Magnitude
-                if mag < dist then dist = mag; closest = v.Character.HumanoidRootPart end
+-- وظيفة حماية الشخصية وتثبيت الدم
+task.spawn(function()
+    while true do
+        task.wait(0.2)
+        if GodModeEnabled and LocalPlayer.Character then
+            local humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                -- تثبيت الصحة والدم لأقصى حد دائماً لمنع الموت
+                humanoid.Health = humanoid.MaxHealth
             end
         end
     end
-    if closest then Camera.CFrame = CFrame.new(Camera.CFrame.Position, closest.Position) end
 end)
 
--- وظيفة تجميع الخشب
-task.spawn(function()
-    while true do
-        task.wait(0.5)
-        if AutoFarmEnabled and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-            for _, obj in pairs(Workspace:GetDescendants()) do
-                if AutoFarmEnabled and (obj.Name:lower():find("wood") or obj.Name:lower():find("tree")) and obj:IsA("BasePart") then
-                    LocalPlayer.Character.HumanoidRootPart.CFrame = obj.CFrame
-                    task.wait(0.3)
-                end
-            end
-        end
+-- زر التفعيل والإيقاف
+GodBtn.MouseButton1Click:Connect(function()
+    GodModeEnabled = not GodModeEnabled
+    if GodModeEnabled then
+        GodBtn.Text = "عدم الموت: [✔️]"
+        GodBtn.BorderColor3 = Color3.fromRGB(0, 255, 0)
+    else
+        GodBtn.Text = "عدم الموت: [❌]"
+        GodBtn.BorderColor3 = Color3.fromRGB(255, 0, 0)
     end
 end)
