@@ -98,6 +98,6 @@ InfoBtn.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "تنبيه الماب",
         Text = "فلوس الماب سيرفر ستايد ولا يمكن تعديلها بالسكربتات!",
-        Duration = 3
+        Duration = 10
     })
 end)
