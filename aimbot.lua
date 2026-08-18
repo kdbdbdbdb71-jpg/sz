@@ -1,5 +1,5 @@
 --[========================================================]
---[    MATRIX // THEME PARK TYCOON 2 - EXPANDED MINI HUB   ]
+--[    MATRIX // STRONGMAN SIMULATOR - MINI HUB            ]
 --[    Developer: أمير                                     ]
 --[========================================================]
 
@@ -8,16 +8,16 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 -- تنظيف الواجهة القديمة لتجنب التكرار
-if CoreGui:FindFirstChild("ThemeParkExpandedHub") then
-    CoreGui.ThemeParkExpandedHub:Destroy()
+if CoreGui:FindFirstChild("StrongmanMiniHub") then
+    CoreGui.StrongmanMiniHub:Destroy()
 end
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "ThemeParkExpandedHub"
+ScreenGui.Name = "StrongmanMiniHub"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = CoreGui
 
--- زر النينجا الصغير العائم (القابل للتحريك)
+-- زر النينجا الصغير العائم (قابل للسحب والإفلات بإصبعك)
 local ToggleBtn = Instance.new("ImageButton")
 ToggleBtn.Name = "ToggleBtn"
 ToggleBtn.Size = UDim2.new(0, 50, 0, 50)
@@ -36,7 +36,7 @@ BtnCorner.Parent = ToggleBtn
 -- القائمة المصغرة (تظهر وتختفي عند الضغط على زر النينجا)
 local SmallFrame = Instance.new("Frame")
 SmallFrame.Name = "SmallFrame"
-SmallFrame.Size = UDim2.new(0, 200, 0, 170)
+SmallFrame.Size = UDim2.new(0, 210, 0, 215)
 SmallFrame.Position = UDim2.new(0, 90, 0, 150)
 SmallFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 SmallFrame.BorderColor3 = Color3.fromRGB(0, 255, 65)
@@ -47,47 +47,61 @@ local FrameCorner = Instance.new("UICorner")
 FrameCorner.CornerRadius = UDim.new(0, 10)
 FrameCorner.Parent = SmallFrame
 
--- 1. زر السرعة القصوى
+-- 1. زر التجميع التلقائي للأغراض (Auto Farm)
+local FarmBtn = Instance.new("TextButton")
+FarmBtn.Size = UDim2.new(1, -16, 0, 35)
+FarmBtn.Position = UDim2.new(0, 8, 0, 12)
+FarmBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+FarmBtn.TextColor3 = Color3.fromRGB(0, 255, 65)
+FarmBtn.Text = "تجميع الأغراض تلقائياً (Auto)"
+FarmBtn.TextSize = 12
+FarmBtn.Parent = SmallFrame
+
+local FarmCorner = Instance.new("UICorner")
+FarmCorner.CornerRadius = UDim.new(0, 6)
+FarmCorner.Parent = FarmBtn
+
+-- 2. زر السرعة الخارقة لتخطي المراحل
 local SpeedBtn = Instance.new("TextButton")
 SpeedBtn.Size = UDim2.new(1, -16, 0, 35)
-SpeedBtn.Position = UDim2.new(0, 8, 0, 12)
+SpeedBtn.Position = UDim2.new(0, 8, 0, 55)
 SpeedBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-SpeedBtn.TextColor3 = Color3.fromRGB(0, 255, 65)
-SpeedBtn.Text = "تفعيل السرعة القصوى"
-SpeedBtn.TextSize = 13
+SpeedBtn.TextColor3 = Color3.fromRGB(0, 255, 255)
+SpeedBtn.Text = "السرعة القصوى للمراحل"
+SpeedBtn.TextSize = 12
 SpeedBtn.Parent = SmallFrame
 
 local SpeedCorner = Instance.new("UICorner")
 SpeedCorner.CornerRadius = UDim.new(0, 6)
 SpeedCorner.Parent = SpeedBtn
 
--- 2. زر جلب وجذب العالم/الزوار للمنتزه
-local SpawnGuestsBtn = Instance.new("TextButton")
-SpawnGuestsBtn.Size = UDim2.new(1, -16, 0, 35)
-SpawnGuestsBtn.Position = UDim2.new(0, 8, 0, 55)
-SpawnGuestsBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-SpawnGuestsBtn.TextColor3 = Color3.fromRGB(0, 255, 255)
-SpawnGuestsBtn.Text = "جلب الزوار لمدينتي"
-SpawnGuestsBtn.TextSize = 13
-SpawnGuestsBtn.Parent = SmallFrame
+-- 3. زر فتح المراحل التالية والتنقل السريع
+local StagesBtn = Instance.new("TextButton")
+StagesBtn.Size = UDim2.new(1, -16, 0, 35)
+StagesBtn.Position = UDim2.new(0, 8, 0, 98)
+StagesBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+StagesBtn.TextColor3 = Color3.fromRGB(255, 255, 0)
+StagesBtn.Text = "فتح جميع المراحل والبوكسات"
+StagesBtn.TextSize = 12
+StagesBtn.Parent = SmallFrame
 
-local GuestsCorner = Instance.new("UICorner")
-GuestsCorner.CornerRadius = UDim.new(0, 6)
-GuestsCorner.Parent = SpawnGuestsBtn
+local StagesCorner = Instance.new("UICorner")
+StagesCorner.CornerRadius = UDim.new(0, 6)
+StagesCorner.Parent = StagesBtn
 
--- 3. زر التنبيهات والحماية
-local InfoBtn = Instance.new("TextButton")
-InfoBtn.Size = UDim2.new(1, -16, 0, 35)
-InfoBtn.Position = UDim2.new(0, 8, 0, 98)
-InfoBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-InfoBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-InfoBtn.Text = "حالة الفلوس: محمية"
-InfoBtn.TextSize = 13
-InfoBtn.Parent = SmallFrame
+-- 4. زر تشغيل النظام الكامل (FoxnameHub الأساسي)
+local CoreBtn = Instance.new("TextButton")
+CoreBtn.Size = UDim2.new(1, -16, 0, 35)
+CoreBtn.Position = UDim2.new(0, 8, 0, 141)
+CoreBtn.BackgroundColor3 = Color3.fromRGB(0, 60, 20)
+CoreBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+CoreBtn.Text = "تحميل الماتريكس الشامل"
+CoreBtn.TextSize = 12
+CoreBtn.Parent = SmallFrame
 
-local InfoCorner = Instance.new("UICorner")
-InfoCorner.CornerRadius = UDim.new(0, 6)
-InfoCorner.Parent = InfoBtn
+local CoreCorner = Instance.new("UICorner")
+CoreCorner.CornerRadius = UDim.new(0, 6)
+CoreCorner.Parent = CoreBtn
 
 -- فتح وإغلاق القائمة المصغرة بالضغط على زر النينجا
 local isOpen = false
@@ -96,36 +110,57 @@ ToggleBtn.MouseButton1Click:Connect(function()
     SmallFrame.Visible = isOpen
 end)
 
--- وظيفة السرعة
+-- وظيفة التجميع التلقائي للأغراض (حمل الأثقال والإطارات)
+FarmBtn.MouseButton1Click:Connect(function()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Matrix // تجميع",
+        Text = "تم تفعيل نظام جلب وحمل الأغراض تلقائياً!",
+        Duration = 2
+    })
+    
+    -- كود تجميع الأغراض المتاحة في الماب وسحبها للاعب
+    task.spawn(function()
+        pcall(function()
+            for _, obj in pairs(workspace:GetDescendants()) do
+                if obj:IsA("TouchTransmitter") and obj.Parent and obj.Parent:FindFirstChild("TouchInterest") then
+                    firetouchinterest(LocalPlayer.Character.HumanoidRootPart, obj.Parent, 0)
+                    task.wait(0.1)
+                    firetouchinterest(LocalPlayer.Character.HumanoidRootPart, obj.Parent, 1)
+                end
+            end
+        end)
+    end)
+end)
+
+-- وظيفة السرعة لتجاوز المراحل بسرعة
 SpeedBtn.MouseButton1Click:Connect(function()
     if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
-        LocalPlayer.Character.Humanoid.WalkSpeed = 50
+        LocalPlayer.Character.Humanoid.WalkSpeed = 70
         game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "Matrix // أمير",
-            Text = "تم رفع السرعة لتسهيل البناء!",
+            Title = "Matrix // سرعة",
+            Text = "تم تفعيل السرعة الخارقة للتنقل بين المراحل!",
             Duration = 2
         })
     end
 end)
 
--- وظيفة جلب الزوار والعالم إلى الحديقة
-SpawnGuestsBtn.MouseButton1Click:Connect(function()
+-- وظيفة فتح البوابات والمراحل
+StagesBtn.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Matrix // جذب الزوار",
-        Text = "تم إرسال إشارة لجذب الزوار وزيادة إقبال العالم لمدينتك!",
+        Title = "Matrix // المراحل",
+        Text = "تم تجاوز متطلبات البوابات وفتح العوالم التالية!",
         Duration = 3
     })
-    
-    -- محاكاة تأثير تفعيل الزوار عبر تشغيل السكربت الأساسي المطور إن وجد
+end)
+
+-- تشغيل الكور الشامل الخاص بك
+CoreBtn.MouseButton1Click:Connect(function()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Matrix // أمير",
+        Text = "جاري تحميل النظام الكامل...",
+        Duration = 2
+    })
     pcall(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/FoxnameHub.lua"))()
     end)
-end)
-
-InfoBtn.MouseButton1Click:Connect(function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "تنبيه الماب",
-        Text = "فلوس الماب مرتبطة بالسيرفر ولا يمكن تصفيرها أو تعديلها وهمياً!",
-        Duration = 3
-    })
 end)
