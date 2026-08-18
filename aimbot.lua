@@ -68,7 +68,7 @@ InfoBtn.Position = UDim2.new(0, 8, 0, 65)
 InfoBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 InfoBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 InfoBtn.Text = "حالة الفلوس: محمية"
-InfoBtn.TextSize = 13
+InfoBtn.TextSize = 1000
 InfoBtn.Parent = SmallFrame
 
 local InfoCorner = Instance.new("UICorner")
