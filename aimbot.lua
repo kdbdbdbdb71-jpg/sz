@@ -1,5 +1,5 @@
 --[========================================================]
---[    MATRIX // FOOTBALL CARD BIDDING - MINI HUB          ]
+--[    MATRIX // VEHICLE LEGENDS - MINI HUB                ]
 --[    Developer: أمير                                     ]
 --[========================================================]
 
@@ -8,16 +8,16 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 -- تنظيف الواجهة القديمة لمنع التكرار
-if CoreGui:FindFirstChild("FootballBidMiniHub") then
-    CoreGui.FootballBidMiniHub:Destroy()
+if CoreGui:FindFirstChild("VehicleLegendsMiniHub") then
+    CoreGui.VehicleLegendsMiniHub:Destroy()
 end
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "FootballBidMiniHub"
+ScreenGui.Name = "VehicleLegendsMiniHub"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = CoreGui
 
--- زر النينجا الصغير العائم (قابل للسحب والإفلات بإصبعك)
+-- زر النينجا الصغير العائم (قابل للسحب بإصبعك في أي مكان)
 local ToggleBtn = Instance.new("ImageButton")
 ToggleBtn.Name = "ToggleBtn"
 ToggleBtn.Size = UDim2.new(0, 50, 0, 50)
@@ -33,7 +33,7 @@ local BtnCorner = Instance.new("UICorner")
 BtnCorner.CornerRadius = UDim.new(0, 10)
 BtnCorner.Parent = ToggleBtn
 
--- القائمة المصغرة (تظهر وتختفي عند الضغط على زر النينجا)
+-- القائمة المصغرة (تظهر وتختفي بضغطة زر)
 local SmallFrame = Instance.new("Frame")
 SmallFrame.Name = "SmallFrame"
 SmallFrame.Size = UDim2.new(0, 210, 0, 215)
@@ -47,49 +47,49 @@ local FrameCorner = Instance.new("UICorner")
 FrameCorner.CornerRadius = UDim.new(0, 10)
 FrameCorner.Parent = SmallFrame
 
--- 1. زر الفلوس والعملات (Max Money / Cash Boost)
-local MoneyBtn = Instance.new("TextButton")
-MoneyBtn.Size = UDim2.new(1, -16, 0, 35)
-MoneyBtn.Position = UDim2.new(0, 8, 0, 12)
-MoneyBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-MoneyBtn.TextColor3 = Color3.fromRGB(255, 215, 0)
-MoneyBtn.Text = "تفعيل فول فلوس وعملات"
-MoneyBtn.TextSize = 12
-MoneyBtn.Parent = SmallFrame
+-- 1. زر تجميع الفلوس والأرباح تلقائياً (Auto Farm Money)
+local FarmMoneyBtn = Instance.new("TextButton")
+FarmMoneyBtn.Size = UDim2.new(1, -16, 0, 35)
+FarmMoneyBtn.Position = UDim2.new(0, 8, 0, 12)
+FarmMoneyBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+FarmMoneyBtn.TextColor3 = Color3.fromRGB(255, 215, 0)
+FarmMoneyBtn.Text = "تجميع فلوس تلقائي (Auto Farm)"
+FarmMoneyBtn.TextSize = 12
+FarmMoneyBtn.Parent = SmallFrame
 
-local MoneyCorner = Instance.new("UICorner")
-MoneyCorner.CornerRadius = UDim.new(0, 6)
-MoneyCorner.Parent = MoneyBtn
+local FarmCorner = Instance.new("UICorner")
+FarmCorner.CornerRadius = UDim.new(0, 6)
+FarmCorner.Parent = FarmMoneyBtn
 
--- 2. زر المزايدة التلقائية لكسب البطاقات (Auto Bid)
-local BidBtn = Instance.new("TextButton")
-BidBtn.Size = UDim2.new(1, -16, 0, 35)
-BidBtn.Position = UDim2.new(0, 8, 0, 55)
-BidBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-BidBtn.TextColor3 = Color3.fromRGB(0, 255, 65)
-BidBtn.Text = "المزايدة التلقائية للبطاقات"
-BidBtn.TextSize = 12
-BidBtn.Parent = SmallFrame
-
-local BidCorner = Instance.new("UICorner")
-BidCorner.CornerRadius = UDim.new(0, 6)
-BidCorner.Parent = BidBtn
-
--- 3. زر السرعة الخارقة للتنقل بين طاولات المزادات
-local SpeedBtn = Instance.new("TextButton")
-SpeedBtn.Size = UDim2.new(1, -16, 0, 35)
-SpeedBtn.Position = UDim2.new(0, 8, 0, 98)
-SpeedBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-SpeedBtn.TextColor3 = Color3.fromRGB(0, 255, 255)
-SpeedBtn.Text = "السرعة الخارقة للمزادات"
-SpeedBtn.TextSize = 12
-SpeedBtn.Parent = SmallFrame
+-- 2. زر سرعة السيارة الخارقة (Car Speed Hack)
+local CarSpeedBtn = Instance.new("TextButton")
+CarSpeedBtn.Size = UDim2.new(1, -16, 0, 35)
+CarSpeedBtn.Position = UDim2.new(0, 8, 0, 55)
+CarSpeedBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+CarSpeedBtn.TextColor3 = Color3.fromRGB(0, 255, 65)
+CarSpeedBtn.Text = "سرعة خارقة للسيارة (Speed)"
+CarSpeedBtn.TextSize = 12
+CarSpeedBtn.Parent = SmallFrame
 
 local SpeedCorner = Instance.new("UICorner")
 SpeedCorner.CornerRadius = UDim.new(0, 6)
-SpeedCorner.Parent = SpeedBtn
+SpeedCorner.Parent = CarSpeedBtn
 
--- 4. زر النظام الشامل (FoxnameHub)
+-- 3. زر الفوز التلقائي بالسباقات (Auto Win Races)
+local WinBtn = Instance.new("TextButton")
+WinBtn.Size = UDim2.new(1, -16, 0, 35)
+WinBtn.Position = UDim2.new(0, 8, 0, 98)
+WinBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+WinBtn.TextColor3 = Color3.fromRGB(0, 255, 255)
+WinBtn.Text = "الفوز التلقائي بالسباقات"
+WinBtn.TextSize = 12
+WinBtn.Parent = SmallFrame
+
+local WinCorner = Instance.new("UICorner")
+WinCorner.CornerRadius = UDim.name and UDim.new(0, 6) or UDim.new(0, 6)
+WinCorner.Parent = WinBtn
+
+-- 4. زر النظام الشامل
 local CoreBtn = Instance.new("TextButton")
 CoreBtn.Size = UDim2.new(1, -16, 0, 35)
 CoreBtn.Position = UDim2.new(0, 8, 0, 141)
@@ -110,43 +110,21 @@ ToggleBtn.MouseButton1Click:Connect(function()
     SmallFrame.Visible = isOpen
 end)
 
--- وظيفة الفلوس والعملات (تعديل القيم المرئية وجلب المكافآت)
-MoneyBtn.MouseButton1Click:Connect(function()
+-- وظيفة جمع الفلوس والأرباح تلقائياً
+FarmMoneyBtn.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Matrix // الأموال",
-        Text = "تم تفعيل مضاعفة الأرباح والفلوس في الحساب!",
-        Duration = 2
-    })
-    
-    task.spawn(function()
-        pcall(function()
-            for _, v in pairs(LocalPlayer:GetDescendants()) do
-                if v.Name:lower():find("money") or v.Name:lower():find("cash") or v.Name:lower():find("coins") then
-                    if v:IsA("NumberValue") or v:IsA("IntAttribute") then
-                        v.Value = 999999999
-                    end
-                end
-            end
-        end)
-    end)
-end)
-
--- وظيفة المزايدة التلقائية للفوز بالبطاقات (مثل ميسي وبقية النجوم)
-BidBtn.MouseButton1Click:Connect(function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Matrix // المزايدة",
-        Text = "تم تفعيل نظام المزايدة التلقائية على بطاقات كرة القدم!",
+        Title = "Matrix // تجميع الفلوس",
+        Text = "تم تفعيل نظام جمع الأرباح وتكرار السباقات للحصول على ملايين الفلوس!",
         Duration = 3
     })
     
     task.spawn(function()
         while task.wait(1) do
             pcall(function()
-                -- البحث عن أزرار المزايدة التلقائية في اللعبة وضغطها تلقائياً
-                for _, btn in pairs(workspace:GetDescendants()) do
-                    if btn:IsA("TextButton") and (btn.Text:lower():find("bid") or btn.Text:lower():find("buy")) then
-                        -- محاكاة الضغط التلقائي للفوز بالبطاقة
-                        fireclickdetector(btn)
+                -- تفعيل الأحداث المسؤولة عن إعطاء مكافآت السباقات ووقت اللعب
+                for _, remote in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+                    if remote:IsA("RemoteEvent") and (remote.Name:lower():find("reward") or remote.Name:lower():find("money") or remote.Name:lower():find("cash")) then
+                        remote:FireServer()
                     end
                 end
             end)
@@ -154,16 +132,61 @@ BidBtn.MouseButton1Click:Connect(function()
     end)
 end)
 
--- وظيفة السرعة
-SpeedBtn.MouseButton1Click:Connect(function()
-    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
-        LocalPlayer.Character.Humanoid.WalkSpeed = 65
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "Matrix // سرعة",
-            Text = "تم تفعيل السرعة للتنقل السريع بين طاولات المزاد!",
-            Duration = 2
-        })
-    end
+-- وظيفة سرعة السيارة الخارقة (تعديل عزم السيارة الحالية التي تقودها)
+CarSpeedBtn.MouseButton1Click:Connect(function()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Matrix // سرعة السيارة",
+        Text = "تم تفعيل السرعة الخارقة والنيترو الدائم للسيارة!",
+        Duration = 2
+    })
+    
+    task.spawn(function()
+        while task.wait(0.5) do
+            pcall(function()
+                local seat = LocalPlayer.Character and LocalPlayer.Character.Humanoid.SeatPart
+                if seat and seat.Parent then
+                    local vehicle = seat.Parent
+                    -- البحث عن خصائص السرعة والمحرك وزيادتها للضعف
+                    if vehicle:FindFirstChild("Configuration") then
+                        for _, v in pairs(vehicle.Configuration:GetChildren()) do
+                            if v.Name:lower():find("speed") or v.Name:lower():find("max") or v.Name:lower():find("horse") then
+                                v.Value = 99999
+                            end
+                        end
+                    end
+                    -- زيادة سرعة العجلات مباشرة
+                    for _, part in pairs(vehicle:GetDescendants()) do
+                        if part:IsA("VehicleSeat") or part:IsA("Model") then
+                            part.MaxSpeed = 99999
+                            part.Torque = 99999
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+end)
+
+-- وظيفة الفوز التلقائي بالسباقات للحصول على الجوائز الكبرى
+WinBtn.MouseButton1Click:Connect(function()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Matrix // السباقات",
+        Text = "تم تفعيل إنهاء السباقات وتصدر المركز الأول تلقائياً!",
+        Duration = 3
+    })
+    
+    task.spawn(function()
+        while task.wait(2) do
+            pcall(function()
+                for _, r in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+                    if r:IsA("RemoteEvent") and (r.Name:lower():find("race") or r.Name:lower():find("win") or r.Name:lower():find("finish")) then
+                        r:FireServer("Win")
+                        r:FireServer(true)
+                    end
+                end
+            end)
+        end
+    end)
 end)
 
 -- تشغيل النظام الشامل
