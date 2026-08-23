@@ -1,5 +1,5 @@
 --[========================================================]
---[    MATRIX // FOOTBALL TYCOON 2 - MINI HUB              ]
+--[    MATRIX // KICK SIMULATOR - MINI HUB                 ]
 --[    Developer: أمير                                     ]
 --[========================================================]
 
@@ -8,12 +8,12 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
 -- تنظيف الواجهة القديمة لمنع التكرار
-if CoreGui:FindFirstChild("FootballTycoon2MiniHub") then
-    CoreGui.FootballTycoon2MiniHub:Destroy()
+if CoreGui:FindFirstChild("KickSimulatorMiniHub") then
+    CoreGui.KickSimulatorMiniHub:Destroy()
 end
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "FootballTycoon2MiniHub"
+ScreenGui.Name = "KickSimulatorMiniHub"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = CoreGui
 
@@ -47,47 +47,47 @@ local FrameCorner = Instance.new("UICorner")
 FrameCorner.CornerRadius = UDim.new(0, 10)
 FrameCorner.Parent = SmallFrame
 
--- 1. زر تجميع الفلوس والأرباح تلقائياً (Auto Collect Cash)
-local CashBtn = Instance.new("TextButton")
-CashBtn.Size = UDim2.new(1, -16, 0, 35)
-CashBtn.Position = UDim2.new(0, 8, 0, 12)
-CashBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-CashBtn.TextColor3 = Color3.fromRGB(255, 215, 0)
-CashBtn.Text = "تجميع الفلوس والأرباح تلقائياً"
-CashBtn.TextSize = 12
-CashBtn.Parent = SmallFrame
+-- 1. زر ركل قوي جداً (Super Kick Power)
+local KickBtn = Instance.new("TextButton")
+KickBtn.Size = UDim2.new(1, -16, 0, 35)
+KickBtn.Position = UDim2.new(0, 8, 0, 12)
+KickBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+KickBtn.TextColor3 = Color3.fromRGB(255, 50, 50)
+KickBtn.Text = "تفعيل ركل قوي جداً (Power)"
+KickBtn.TextSize = 12
+KickBtn.Parent = SmallFrame
 
-local CashCorner = Instance.new("UICorner")
-CashCorner.CornerRadius = UDim.new(0, 6)
-CashCorner.Parent = CashBtn
+local KickCorner = Instance.new("UICorner")
+KickCorner.CornerRadius = UDim.new(0, 6)
+KickCorner.Parent = KickBtn
 
--- 2. زر السرعة الخارقة للتنقل في النادي
+-- 2. زر تجميع الفلوس والأرباح تلقائياً (Auto Farm Money)
+local MoneyBtn = Instance.new("TextButton")
+MoneyBtn.Size = UDim2.new(1, -16, 0, 35)
+MoneyBtn.Position = UDim2.new(0, 8, 0, 55)
+MoneyBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+MoneyBtn.TextColor3 = Color3.fromRGB(255, 215, 0)
+MoneyBtn.Text = "تجميع الفلوس تلقائياً (Cash)"
+MoneyBtn.TextSize = 12
+MoneyBtn.Parent = SmallFrame
+
+local MoneyCorner = Instance.new("UICorner")
+MoneyCorner.CornerRadius = UDim.new(0, 6)
+MoneyCorner.Parent = MoneyBtn
+
+-- 3. زر السرعة الخارقة للتنقل السريع
 local SpeedBtn = Instance.new("TextButton")
 SpeedBtn.Size = UDim2.new(1, -16, 0, 35)
-SpeedBtn.Position = UDim2.new(0, 8, 0, 55)
+SpeedBtn.Position = UDim2.new(0, 8, 0, 98)
 SpeedBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 SpeedBtn.TextColor3 = Color3.fromRGB(0, 255, 65)
-SpeedBtn.Text = "السرعة الخارقة للبناء والتنقل"
+SpeedBtn.Text = "السرعة الخارقة للتنقل"
 SpeedBtn.TextSize = 12
 SpeedBtn.Parent = SmallFrame
 
 local SpeedCorner = Instance.new("UICorner")
 SpeedCorner.CornerRadius = UDim.new(0, 6)
 SpeedCorner.Parent = SpeedBtn
-
--- 3. ميزة مميزة: جمع مكافآت النادي وسرعة التطوير
-local BoostBtn = Instance.new("TextButton")
-BoostBtn.Size = UDim2.new(1, -16, 0, 35)
-BoostBtn.Position = UDim2.new(0, 8, 0, 98)
-BoostBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-BoostBtn.TextColor3 = Color3.fromRGB(0, 255, 255)
-BoostBtn.Text = "مضاعفة دخل التذاكر والجماهير"
-BoostBtn.TextSize = 12
-BoostBtn.Parent = SmallFrame
-
-local BoostCorner = Instance.new("UICorner")
-BoostCorner.CornerRadius = UDim.new(0, 6)
-BoostCorner.Parent = BoostBtn
 
 -- 4. زر النظام الشامل
 local CoreBtn = Instance.new("TextButton")
@@ -110,22 +110,51 @@ ToggleBtn.MouseButton1Click:Connect(function()
     SmallFrame.Visible = isOpen
 end)
 
--- وظيفة جمع الفلوس والأرباح من أزرار وقواطع التاييكون تلقائياً
-CashBtn.MouseButton1Click:Connect(function()
+-- وظيفة الركل القوي جداً (زيادة قوة وسرعة دفع الكرة لأقصى حد)
+KickBtn.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Matrix // الأرباح",
-        Text = "تم تفعيل نظام جلب وجمع أرباح النادي تلقائياً!",
+        Title = "Matrix // القوة",
+        Text = "تم تفعيل قوة الركل الخارقة لتطير الكرة لآخر الخريطة!",
         Duration = 3
+    })
+    
+    task.spawn(function()
+        while task.wait(0.5) do
+            pcall(function()
+                -- رفع قيم القوة الخاصة باللاعب إذا وجدت في ملفات الشخصية أو الاحداث
+                for _, v in pairs(LocalPlayer:GetDescendants()) do
+                    if v.Name:lower():find("power") or v.Name:lower():find("strength") or v.Name:lower():find("kick") then
+                        if v:IsA("NumberValue") or v:IsA("IntAttribute") then
+                            v.Value = 999999999
+                        end
+                    end
+                end
+                
+                -- تنفيذ حدث الركل التلقائي في السيرفر
+                for _, remote in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+                    if remote:IsA("RemoteEvent") and (remote.Name:lower():find("kick") or remote.Name:lower():find("ball")) then
+                        remote:FireServer(999999)
+                    end
+                end
+            end)
+        end
+    end)
+end)
+
+-- وظيفة تجميع الفلوس تلقائياً
+MoneyBtn.MouseButton1Click:Connect(function()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Matrix // الأموال",
+        Text = "تم تفعيل نظام جلب الفلوس والجوائز تلقائياً!",
+        Duration = 2
     })
     
     task.spawn(function()
         while task.wait(1) do
             pcall(function()
-                for _, obj in pairs(workspace:GetDescendants()) do
-                    if obj:IsA("TouchTransmitter") and (obj.Parent.Name:lower():find("cash") or obj.Parent.Name:lower():find("money") or obj.Parent.Name:lower():find("collector")) then
-                        firetouchinterest(LocalPlayer.Character.HumanoidRootPart, obj.Parent, 0)
-                        task.wait(0.1)
-                        firetouchinterest(LocalPlayer.Character.HumanoidRootPart, obj.Parent, 1)
+                for _, remote in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+                    if remote:IsA("RemoteEvent") and (remote.Name:lower():find("money") or remote.Name:lower():find("cash") or remote.Name:lower():find("claim")) then
+                        remote:FireServer()
                     end
                 end
             end)
@@ -136,41 +165,20 @@ end)
 -- وظيفة السرعة الخارقة
 SpeedBtn.MouseButton1Click:Connect(function()
     if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
-        LocalPlayer.Character.Humanoid.WalkSpeed = 60
+        LocalPlayer.Character.Humanoid.WalkSpeed = 65
         game:GetService("StarterGui"):SetCore("SendNotification", {
             Title = "Matrix // سرعة",
-            Text = "تم تفعيل السرعة الخارقة للتجوال في النادي!",
+            Text = "تم تفعيل السرعة الخارقة بنجاح!",
             Duration = 2
         })
     end
-end)
-
--- وظيفة مضاعفة دخل الجماهير والتذاكر
-BoostBtn.MouseButton1Click:Connect(function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Matrix // تطوير النادي",
-        Text = "تم تفعيل مضاعفة أرباح المباريات والجماهير في الملعب!",
-        Duration = 3
-    })
-    
-    task.spawn(function()
-        while task.wait(2) do
-            pcall(function()
-                for _, remote in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
-                    if remote:IsA("RemoteEvent") and (remote.Name:lower():find("income") or remote.Name:lower():find("cash") or remote.Name:lower():find("match")) then
-                        remote:FireServer()
-                    end
-                end
-            end)
-        end
-    end)
 end)
 
 -- تشغيل النظام الشامل
 CoreBtn.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "Matrix // أمير",
-        Text = "جاري تشغيل السكربت الإضافي...",
+        Text = "جاري تشغيل النظام الإضافي...",
         Duration = 2
     })
     pcall(function()
