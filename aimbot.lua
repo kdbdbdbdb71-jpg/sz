@@ -1,187 +1,338 @@
 --[========================================================]
---[    MATRIX // KICK SIMULATOR - MINI HUB                 ]
+--[    🚀 AMIR SCRIPT HUB - V.3.0 (MM2 EDITION) 🚀        ]
 --[    Developer: أمير                                     ]
 --[========================================================]
 
 local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
+local Workspace = game:GetService("Workspace")
 
 -- تنظيف الواجهة القديمة لمنع التكرار
-if CoreGui:FindFirstChild("KickSimulatorMiniHub") then
-    CoreGui.KickSimulatorMiniHub:Destroy()
+if CoreGui:FindFirstChild("AmirScriptHubMM2") then
+    CoreGui.AmirScriptHubMM2:Destroy()
 end
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "KickSimulatorMiniHub"
+ScreenGui.Name = "AmirScriptHubMM2"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = CoreGui
 
--- زر النينجا الصغير العائم (قابل للسحب والإفلات بإصبعك في أي مكان)
+-- زر النينجا الصغير العائم (لتسهيل فتح وإغلاق الواجهة في أي وقت)
 local ToggleBtn = Instance.new("ImageButton")
 ToggleBtn.Name = "ToggleBtn"
 ToggleBtn.Size = UDim2.new(0, 50, 0, 50)
 ToggleBtn.Position = UDim2.new(0, 30, 0, 150)
-ToggleBtn.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-ToggleBtn.BorderColor3 = Color3.fromRGB(0, 255, 65)
+ToggleBtn.BackgroundColor3 = Color3.fromRGB(15, 20, 30)
+ToggleBtn.BorderColor3 = Color3.fromRGB(0, 255, 100)
 ToggleBtn.BorderSizePixel = 2
-ToggleBtn.Image = "rbxassetid://10723349646" -- أيقونة النينجا
+ToggleBtn.Image = "rbxassetid://10723349646"
 ToggleBtn.Draggable = true
 ToggleBtn.Parent = ScreenGui
 
 local BtnCorner = Instance.new("UICorner")
-BtnCorner.CornerRadius = UDim.new(0, 10)
+BtnCorner.CornerRadius = UDim.new(0, 12)
 BtnCorner.Parent = ToggleBtn
 
--- القائمة المصغرة (تظهر وتختفي عند الضغط على زر النينجا)
-local SmallFrame = Instance.new("Frame")
-SmallFrame.Name = "SmallFrame"
-SmallFrame.Size = UDim2.new(0, 210, 0, 215)
-SmallFrame.Position = UDim2.new(0, 90, 0, 150)
-SmallFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-SmallFrame.BorderColor3 = Color3.fromRGB(0, 255, 65)
-SmallFrame.Visible = false
-SmallFrame.Parent = ScreenGui
+-- الواجهة الرئيسة (المطابقة لتصميمك الفخم)
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 520, 0, 320)
+MainFrame.Position = UDim2.new(0.5, -260, 0.5, -160)
+MainFrame.BackgroundColor3 = Color3.fromRGB(18, 22, 33)
+MainFrame.BorderColor3 = Color3.fromRGB(0, 255, 100)
+MainFrame.BorderSizePixel = 1
+MainFrame.Visible = true
+MainFrame.Draggable = true
+MainFrame.Parent = ScreenGui
 
-local FrameCorner = Instance.new("UICorner")
-FrameCorner.CornerRadius = UDim.new(0, 10)
-FrameCorner.Parent = SmallFrame
+local MainCorner = Instance.new("UICorner")
+MainCorner.CornerRadius = UDim.new(0, 10)
+MainCorner.Parent = MainFrame
 
--- 1. زر ركل قوي جداً (Super Kick Power)
-local KickBtn = Instance.new("TextButton")
-KickBtn.Size = UDim2.new(1, -16, 0, 35)
-KickBtn.Position = UDim2.new(0, 8, 0, 12)
-KickBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-KickBtn.TextColor3 = Color3.fromRGB(255, 50, 50)
-KickBtn.Text = "تفعيل ركل قوي جداً (Power)"
-KickBtn.TextSize = 12
-KickBtn.Parent = SmallFrame
+-- شريط العنوان العلوي
+local TitleBar = Instance.new("TextLabel")
+TitleBar.Size = UDim2.new(1, 0, 0, 40)
+TitleBar.BackgroundColor3 = Color3.fromRGB(24, 30, 45)
+TitleBar.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleBar.Text = "  🚀 AMIR SCRIPT HUB - V.3.0 🚀"
+TitleBar.TextSize = 15
+TitleBar.Font = Enum.Font.GothamBold
+TitleBar.TextXAlignment = Enum.TextXAlignment.Left
+TitleBar.Parent = MainFrame
 
-local KickCorner = Instance.new("UICorner")
-KickCorner.CornerRadius = UDim.new(0, 6)
-KickCorner.Parent = KickBtn
+local TitleCorner = Instance.new("UICorner")
+TitleCorner.CornerRadius = UDim.new(0, 10)
+TitleCorner.Parent = TitleBar
 
--- 2. زر تجميع الفلوس والأرباح تلقائياً (Auto Farm Money)
-local MoneyBtn = Instance.new("TextButton")
-MoneyBtn.Size = UDim2.new(1, -16, 0, 35)
-MoneyBtn.Position = UDim2.new(0, 8, 0, 55)
-MoneyBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-MoneyBtn.TextColor3 = Color3.fromRGB(255, 215, 0)
-MoneyBtn.Text = "تجميع الفلوس تلقائياً (Cash)"
-MoneyBtn.TextSize = 12
-MoneyBtn.Parent = SmallFrame
+-- زر إغلاق الواجهة (X)
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Size = UDim2.new(0, 40, 0, 40)
+CloseBtn.Position = UDim2.new(1, -40, 0, 0)
+CloseBtn.BackgroundTransparency = 1
+CloseBtn.TextColor3 = Color3.fromRGB(255, 100, 100)
+CloseBtn.Text = "X"
+CloseBtn.TextSize = 16
+CloseBtn.Font = Enum.Font.GothamBold
+CloseBtn.Parent = MainFrame
 
-local MoneyCorner = Instance.new("UICorner")
-MoneyCorner.CornerRadius = UDim.new(0, 6)
-MoneyCorner.Parent = MoneyBtn
-
--- 3. زر السرعة الخارقة للتنقل السريع
-local SpeedBtn = Instance.new("TextButton")
-SpeedBtn.Size = UDim2.new(1, -16, 0, 35)
-SpeedBtn.Position = UDim2.new(0, 8, 0, 98)
-SpeedBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-SpeedBtn.TextColor3 = Color3.fromRGB(0, 255, 65)
-SpeedBtn.Text = "السرعة الخارقة للتنقل"
-SpeedBtn.TextSize = 12
-SpeedBtn.Parent = SmallFrame
-
-local SpeedCorner = Instance.new("UICorner")
-SpeedCorner.CornerRadius = UDim.new(0, 6)
-SpeedCorner.Parent = SpeedBtn
-
--- 4. زر النظام الشامل
-local CoreBtn = Instance.new("TextButton")
-CoreBtn.Size = UDim2.new(1, -16, 0, 35)
-CoreBtn.Position = UDim2.new(0, 8, 0, 141)
-CoreBtn.BackgroundColor3 = Color3.fromRGB(0, 60, 20)
-CoreBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-CoreBtn.Text = "تحميل الماتريكس الشامل"
-CoreBtn.TextSize = 12
-CoreBtn.Parent = SmallFrame
-
-local CoreCorner = Instance.new("UICorner")
-CoreCorner.CornerRadius = UDim.new(0, 6)
-CoreCorner.Parent = CoreBtn
-
--- فتح وإغلاق القائمة المصغرة بلمسة زر النينجا
-local isOpen = false
-ToggleBtn.MouseButton1Click:Connect(function()
-    isOpen = not isOpen
-    SmallFrame.Visible = isOpen
+CloseBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
 end)
 
--- وظيفة الركل القوي جداً (زيادة قوة وسرعة دفع الكرة لأقصى حد)
-KickBtn.MouseButton1Click:Connect(function()
+ToggleBtn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = not MainFrame.Visible
+end)
+
+-- القائمة الجانبية (الأزرار)
+local Sidebar = Instance.new("Frame")
+Sidebar.Size = UDim2.new(0, 130, 1, -45)
+Sidebar.Position = UDim2.new(0, 5, 0, 42)
+Sidebar.BackgroundTransparency = 1
+Sidebar.Parent = MainFrame
+
+local UIListLayout = Instance.new("UIListLayout")
+UIListLayout.Padding = UDim.new(0, 6)
+UIListLayout.Parent = Sidebar
+
+local function createTab(name, yPos)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(1, 0, 0, 35)
+    btn.BackgroundColor3 = Color3.fromRGB(28, 35, 52)
+    btn.TextColor3 = Color3.fromRGB(200, 200, 200)
+    btn.Text = name
+    btn.TextSize = 13
+    btn.Font = Enum.Font.GothamSemibold
+    btn.Parent = Sidebar
+    local c = Instance.new("UICorner")
+    c.CornerRadius = UDim.new(0, 6)
+    c.Parent = btn
+    return btn
+end
+
+local TabPlayer = createTab("👤 Player", 1)
+local TabESP = createTab("👀 ESP Roles", 2)
+local TabWeapon = createTab("🔫 Weapon / Gun", 3)
+
+-- حاويات الصفحات الداخلية
+local Container = Instance.new("Frame")
+Container.Size = UDim2.new(1, -145, 1, -50)
+Container.Position = UDim2.new(0, 140, 0, 45)
+Container.BackgroundTransparency = 1
+Container.Parent = MainFrame
+
+local PagePlayer = Instance.new("ScrollingFrame")
+PagePlayer.Size = UDim2.new(1, 0, 1, 0)
+PagePlayer.BackgroundTransparency = 1
+PagePlayer.Visible = true
+PagePlayer.Parent = Container
+
+local PageESP = Instance.new("ScrollingFrame")
+PageESP.Size = UDim2.new(1, 0, 1, 0)
+PageESP.BackgroundTransparency = 1
+PageESP.Visible = false
+PageESP.Parent = Container
+
+local PageWeapon = Instance.new("ScrollingFrame")
+PageWeapon.Size = UDim2.new(1, 0, 1, 0)
+PageWeapon.BackgroundTransparency = 1
+PageWeapon.Visible = false
+PageWeapon.Parent = Container
+
+-- تبديل الصفحات عند الضغط
+TabPlayer.MouseButton1Click:Connect(function()
+    PagePlayer.Visible = true
+    PageESP.Visible = false
+    PageWeapon.Visible = false
+end)
+
+TabESP.MouseButton1Click:Connect(function()
+    PagePlayer.Visible = false
+    PageESP.Visible = true
+    PageWeapon.Visible = false
+end)
+
+TabWeapon.MouseButton1Click:Connect(function()
+    PagePlayer.Visible = false
+    PageESP.Visible = false
+    PageWeapon.Visible = true
+end)
+
+-- --- 1. صفحة اللاعب والسرعة الخارقة (1 إلى 10,000,000) ---
+local SpeedLabel = Instance.new("TextLabel")
+SpeedLabel.Size = UDim2.new(1, -10, 0, 25)
+SpeedLabel.Position = UDim2.new(0, 5, 0, 10)
+SpeedLabel.BackgroundTransparency = 1
+SpeedLabel.TextColor3 = Color3.fromRGB(0, 255, 100)
+SpeedLabel.Text = "سرعة اللاعب (من 1 إلى 10,000,000):"
+SpeedLabel.TextSize = 13
+SpeedLabel.Font = Enum.Font.GothamBold
+SpeedLabel.TextXAlignment = Enum.TextXAlignment.Left
+SpeedLabel.Parent = PagePlayer
+
+local SpeedBox = Instance.new("TextBox")
+SpeedBox.Size = UDim2.new(1, -10, 0, 40)
+SpeedBox.Position = UDim2.new(0, 5, 0, 40)
+SpeedBox.BackgroundColor3 = Color3.fromRGB(28, 35, 52)
+SpeedBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+SpeedBox.PlaceholderText = "اكتب السرعة هنا (مثال: 100 أو 5000)"
+SpeedBox.Text = ""
+SpeedBox.TextSize = 13
+SpeedBox.Font = Enum.Font.Gotham
+SpeedBox.Parent = PagePlayer
+
+local BoxCorner = Instance.new("UICorner")
+BoxCorner.CornerRadius = UDim.new(0, 6)
+BoxCorner.Parent = SpeedBox
+
+SpeedBox.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        local spd = tonumber(SpeedBox.Text)
+        if spd and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+            LocalPlayer.Character.Humanoid.WalkSpeed = spd
+            game:GetService("StarterGui"):SetCore("SendNotification", {
+                Title = "AMIR HUB // سرعة",
+                Text = "تم ضبط السرعة إلى: " .. tostring(spd),
+                Duration = 2
+            })
+        end
+    end
+end)
+
+-- --- 2. صفحة كشف الأدوار (القاتل، الشريف، البريء) ---
+local ESPToggleBtn = Instance.new("TextButton")
+ESPToggleBtn.Size = UDim2.new(1, -10, 0, 45)
+ESPToggleBtn.Position = UDim2.new(0, 5, 0, 15)
+ESPToggleBtn.BackgroundColor3 = Color3.fromRGB(28, 35, 52)
+ESPToggleBtn.TextColor3 = Color3.fromRGB(0, 255, 100)
+ESPToggleBtn.Text = "تشغيل كشف القاتل والشريف والبريء (ESP Roles)"
+ESPToggleBtn.TextSize = 13
+ESPToggleBtn.Font = Enum.Font.GothamBold
+ESPToggleBtn.Parent = PageESP
+
+local ESPCorner = Instance.new("UICorner")
+ESPCorner.CornerRadius = UDim.new(0, 6)
+ESPCorner.Parent = ESPToggleBtn
+
+local espEnabled = false
+ESPToggleBtn.MouseButton1Click:Connect(function()
+    espEnabled = not espEnabled
+    if espEnabled then
+        ESPToggleBtn.TextColor3 = Color3.fromRGB(0, 255, 0)
+        ESPToggleBtn.Text = "✔ تم تفعيل كشف الأدوار بنجاح"
+    else
+        ESPToggleBtn.TextColor3 = Color3.fromRGB(255, 100, 100)
+        ESPToggleBtn.Text = "❌ تم إيقاف كشف الأدوار"
+    end
+end)
+
+-- نظام كشف الأدوار الحقيقي في MM2 وتلوين الأسماء فوق اللاعبين
+task.spawn(function()
+    while task.wait(0.5) do
+        if espEnabled then
+            pcall(function()
+                for _, plr in pairs(Players:GetPlayers()) do
+                    if plr ~= LocalPlayer and plr.Character and plr.Character:FindFirstChild("Head") then
+                        local head = plr.Character.Head
+                        local billboard = head:FindFirstChild("AmirESPTag")
+                        
+                        if not billboard then
+                            billboard = Instance.new("BillboardGui")
+                            billboard.Name = "AmirESPTag"
+                            billboard.Size = UDim2.new(0, 100, 0, 40)
+                            billboard.StudsOffset = Vector3.new(0, 2.5, 0)
+                            billboard.AlwaysOnTop = true
+                            billboard.Parent = head
+                            
+                            local txt = Instance.new("TextLabel")
+                            txt.Name = "RoleText"
+                            txt.Size = UDim2.new(1, 0, 1, 0)
+                            txt.BackgroundTransparency = 1
+                            txt.TextSize = 12
+                            txt.Font = Enum.Font.GothamBold
+                            txt.TextStrokeTransparency = 0
+                            txt.Parent = billboard
+                        end
+                        
+                        local roleText = billboard:FindFirstChild("RoleText")
+                        if roleText then
+                            local backpack = plr:FindFirstChild("Backpack")
+                            local char = plr.Character
+                            local role = "بريء 🟢 (Innocent)"
+                            local roleColor = Color3.fromRGB(0, 255, 0)
+                            
+                            -- فحص هل يملك سكين (قاتل) أو مسريف (شريف)
+                            if (backpack and (backpack:FindFirstChild("Knife") or backpack:FindFirstChild("Gun"))) or 
+                               (char and (char:FindFirstChild("Knife") or char:FindFirstChild("Gun"))) then
+                                
+                                if (backpack and backpack:FindFirstChild("Knife")) or (char and char:FindFirstChild("Knife")) then
+                                    role = "قاتل 🔴 (Murderer)"
+                                    roleColor = Color3.fromRGB(255, 0, 0)
+                                else
+                                    role = "شريف 🔵 (Sheriff)"
+                                    roleColor = Color3.fromRGB(0, 150, 255)
+                                end
+                            end
+                            
+                            roleText.Text = plr.Name .. "\n[" .. role .. "]"
+                            roleText.TextColor3 = roleColor
+                        end
+                    end
+                end
+            end)
+        else
+            -- مسح الـ ESP عند الإيقاف
+            for _, plr in pairs(Players:GetPlayers()) do
+                if plr.Character and plr.Character:FindFirstChild("Head") then
+                    local tag = plr.Character.Head:FindFirstChild("AmirESPTag")
+                    if tag then tag:Destroy() end
+                end
+            end
+        end
+    end
+end)
+
+-- --- 3. صفحة الأسلحة والمسدس (مجاناً) ---
+local GunBtn = Instance.new("TextButton")
+GunBtn.Size = UDim2.new(1, -10, 0, 45)
+GunBtn.Position = UDim2.new(0, 5, 0, 15)
+GunBtn.BackgroundColor3 = Color3.fromRGB(28, 35, 52)
+GunBtn.TextColor3 = Color3.fromRGB(0, 150, 255)
+GunBtn.Text = "الحصول على المسدس تلقائياً (Gun Drop)"
+GunBtn.TextSize = 13
+GunBtn.Font = Enum.Font.GothamBold
+GunBtn.Parent = PageWeapon
+
+local GunCorner = Instance.new("UICorner")
+GunCorner.CornerRadius = UDim.new(0, 6)
+GunCorner.Parent = GunBtn
+
+GunBtn.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Matrix // القوة",
-        Text = "تم تفعيل قوة الركل الخارقة لتطير الكرة لآخر الخريطة!",
+        Title = "AMIR HUB // أسلحة",
+        Text = "جاري البحث عن المسدس الساقط في الخريطة...",
         Duration = 3
     })
     
     task.spawn(function()
-        while task.wait(0.5) do
-            pcall(function()
-                -- رفع قيم القوة الخاصة باللاعب إذا وجدت في ملفات الشخصية أو الاحداث
-                for _, v in pairs(LocalPlayer:GetDescendants()) do
-                    if v.Name:lower():find("power") or v.Name:lower():find("strength") or v.Name:lower():find("kick") then
-                        if v:IsA("NumberValue") or v:IsA("IntAttribute") then
-                            v.Value = 999999999
+        pcall(function()
+            for _, obj in pairs(Workspace:GetDescendants()) do
+                if obj.Name == "GunDrop" or obj.Name == "Gun" then
+                    if obj:IsA("BasePart") or obj:IsA("Model") then
+                        local targetPart = obj:IsA("Model") and obj.PrimaryPart or obj
+                        if targetPart and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                            LocalPlayer.Character.HumanoidRootPart.CFrame = targetPart.CFrame
                         end
                     end
                 end
-                
-                -- تنفيذ حدث الركل التلقائي في السيرفر
-                for _, remote in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
-                    if remote:IsA("RemoteEvent") and (remote.Name:lower():find("kick") or remote.Name:lower():find("ball")) then
-                        remote:FireServer(999999)
-                    end
-                end
-            end)
-        end
+            end
+        end)
     end)
 end)
 
--- وظيفة تجميع الفلوس تلقائياً
-MoneyBtn.MouseButton1Click:Connect(function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Matrix // الأموال",
-        Text = "تم تفعيل نظام جلب الفلوس والجوائز تلقائياً!",
-        Duration = 2
-    })
-    
-    task.spawn(function()
-        while task.wait(1) do
-            pcall(function()
-                for _, remote in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
-                    if remote:IsA("RemoteEvent") and (remote.Name:lower():find("money") or remote.Name:lower():find("cash") or remote.Name:lower():find("claim")) then
-                        remote:FireServer()
-                    end
-                end
-            end)
-        end
-    end)
-end)
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "🚀 AMIR SCRIPT HUB - V.3.0",
+    Text = "تم تحميل الواجهة بنجاح، اضغط على زر النينجا للإظهار والإخفاء!",
+    Duration = 4
+})
 
--- وظيفة السرعة الخارقة
-SpeedBtn.MouseButton1Click:Connect(function()
-    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
-        LocalPlayer.Character.Humanoid.WalkSpeed = 65
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "Matrix // سرعة",
-            Text = "تم تفعيل السرعة الخارقة بنجاح!",
-            Duration = 2
-        })
-    end
-end)
-
--- تشغيل النظام الشامل
-CoreBtn.MouseButton1Click:Connect(function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Matrix // أمير",
-        Text = "جاري تشغيل النظام الإضافي...",
-        Duration = 2
-    })
-    pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/FoxnameHub.lua"))()
-    end)
-end)
