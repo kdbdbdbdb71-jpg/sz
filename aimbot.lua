@@ -1,5 +1,5 @@
 --[========================================================]
---[    AMIR'S CUSTOM MM2 SUPREME HUB (MADE FOR YOU)        ]
+--[    AMIR'S MM2 ARABIC HUB (لوحة أمير الخاصة)             ]
 --[    Developer: أمير                                     ]
 --[========================================================]
 
@@ -9,26 +9,26 @@ local LocalPlayer = Players.LocalPlayer
 local Workspace = game:GetService("Workspace")
 
 -- تنظيف أي واجهة قديمة لمنع التكرار
-if CoreGui:FindFirstChild("AmirMM2Hub") then
-    CoreGui.AmirMM2Hub:Destroy()
+if CoreGui:FindFirstChild("AmirArabicMM2") then
+    CoreGui.AmirArabicMM2:Destroy()
 end
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "AmirMM2Hub"
+ScreenGui.Name = "AmirArabicMM2"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = CoreGui
 
 -- ==========================================================
--- زر النينجا العائم (قابل للسحب والإفلات بإصبعك في أي مكان)
+-- زر النينجا العائم (قابل للسحب والإفلات بإصبعك بكل سهولة)
 -- ==========================================================
 local ToggleBtn = Instance.new("ImageButton")
 ToggleBtn.Name = "ToggleBtn"
 ToggleBtn.Size = UDim2.new(0, 55, 0, 55)
 ToggleBtn.Position = UDim2.new(0, 30, 0, 150)
 ToggleBtn.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
-ToggleBtn.BorderColor3 = Color3.fromRGB(255, 140, 0)
+ToggleBtn.BorderColor3 = Color3.fromRGB(0, 255, 100)
 ToggleBtn.BorderSizePixel = 2
-ToggleBtn.Image = "rbxassetid://10723349646" -- أيقونة نينجا
+ToggleBtn.Image = "rbxassetid://10723349646"
 ToggleBtn.Draggable = true
 ToggleBtn.Parent = ScreenGui
 
@@ -37,14 +37,14 @@ BtnCorner.CornerRadius = UDim.new(0, 12)
 BtnCorner.Parent = ToggleBtn
 
 -- ==========================================================
--- اللوحة الرئيسية الخاصة بك يا أمير
+-- اللوحة الرئيسية بالعربي بالكامل
 -- ==========================================================
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
-MainFrame.Size = UDim2.new(0, 320, 0, 390)
-MainFrame.Position = UDim2.new(0.5, -160, 0.5, -195)
+MainFrame.Size = UDim2.new(0, 320, 0, 400)
+MainFrame.Position = UDim2.new(0.5, -160, 0.5, -200)
 MainFrame.BackgroundColor3 = Color3.fromRGB(20, 22, 30)
-MainFrame.BorderColor3 = Color3.fromRGB(255, 140, 0)
+MainFrame.BorderColor3 = Color3.fromRGB(0, 255, 100)
 MainFrame.BorderSizePixel = 2
 MainFrame.Visible = false
 MainFrame.Draggable = true
@@ -54,13 +54,13 @@ local MainCorner = Instance.new("UICorner")
 MainCorner.CornerRadius = UDim.new(0, 12)
 MainCorner.Parent = MainFrame
 
--- العنوان
+-- العنوان بالعربي
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1, 0, 0, 42)
 Title.BackgroundColor3 = Color3.fromRGB(30, 32, 45)
-Title.TextColor3 = Color3.fromRGB(255, 165, 0)
-Title.Text = "🔥 AMIR'S MM2 SUPREME HUB 🔥"
-Title.TextSize = 12
+Title.TextColor3 = Color3.fromRGB(0, 255, 100)
+Title.Text = "⚡ لوحة أدمن أمير لـ MM2 ⚡"
+Title.TextSize = 13
 Title.Font = Enum.Font.GothamBold
 Title.Parent = MainFrame
 
@@ -92,7 +92,7 @@ local ScrollContainer = Instance.new("ScrollingFrame")
 ScrollContainer.Size = UDim2.new(1, -12, 1, -55)
 ScrollContainer.Position = UDim2.new(0, 6, 0, 48)
 ScrollContainer.BackgroundTransparency = 1
-ScrollContainer.CanvasSize = UDim2.new(0, 0, 0, 500)
+ScrollContainer.CanvasSize = UDim2.new(0, 0, 0, 520)
 ScrollContainer.ScrollBarThickness = 4
 ScrollContainer.Parent = MainFrame
 
@@ -116,36 +116,33 @@ local function createBtn(text, color)
     return btn
 end
 
--- الأزرار الخاصة بالميزات والأسلحة والحدث الصيفي
-local BtnSpawner = createBtn("🗡️ تفعيل قائمة أسلحة الكروما (Spawner Hub)", Color3.fromRGB(255, 215, 0))
-local BtnShells = createBtn("🐚 تجميع الصدف والمفاتيح تلقائياً (Summer Event)", Color3.fromRGB(255, 150, 100))
-local BtnAutoFarm = createBtn("💰 جمع العملات والفلوس (Auto Farm Coins)", Color3.fromRGB(0, 255, 120))
-local BtnRoleESP = createBtn("👁️ كشف القاتل والشرطي (Role ESP)", Color3.fromRGB(255, 100, 255))
-local BtnBringGun = createBtn("🔫 جلب سلاح الشريف الساقط (Bring Gun)", Color3.fromRGB(0, 200, 255))
-local BtnSpeed = createBtn("⚡ سرعة خارقة للأداة (WalkSpeed 120)", Color3.fromRGB(0, 255, 65))
+-- أزرار القائمة مترجمة بالكامل للعربية
+local BtnSpawner = createBtn("🗡️ تفعيل قائمة الأسلحة والكروما", Color3.fromRGB(255, 215, 0))
+local BtnShells = createBtn("🐚 تجميع الصدف والمفاتيح تلقائياً", Color3.fromRGB(255, 150, 100))
+local BtnAutoFarm = createBtn("💰 جمع العملات والفلوس أوتوماتيك", Color3.fromRGB(0, 255, 120))
+local BtnRoleESP = createBtn("👁️ كشف القاتل والشرطي (رؤية الأسرار)", Color3.fromRGB(255, 100, 255))
+local BtnBringGun = createBtn("🔫 جلب المسدس الساقط بالخريطة", Color3.fromRGB(0, 200, 255))
+local BtnSpeed = createBtn("⚡ تفعيل سرعة خارقة (120)", Color3.fromRGB(0, 255, 100))
 
 -- ==========================================================
--- الأكواد الوظيفية لكل زر
+-- تشغيل الأوامر برمجياً
 -- ==========================================================
 
--- 1. زر الـ Spawner (يقوم بفتح واجهة الأسلحة النادرة والكروما المصممة لك)
 BtnSpawner.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Amir's Hub",
-        Text = "تم تفعيل قائمة الأسلحة والكروما بنجاح!",
+        Title = "لوحة أمير",
+        Text = "تم فتح قائمة الأسلحة والكروما!",
         Duration = 3
     })
     pcall(function()
-        -- تشغيل نظام توليد الأسلحة المخصص
         loadstring(game:HttpGet("https://raw.githubusercontent.com/ZenosScript/Mm2Autofarm/refs/heads/main/Valentines"))()
     end)
 end)
 
--- 2. زر جمع الصدف والمفاتيح (Summer Event)
 BtnShells.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Summer Event",
-        Text = "تم تفعيل جمع الصدف والمفاتيح أوتوماتيكياً!",
+        Title = "الحدث الصيفي",
+        Text = "جاري تجميع الصدف والمفاتيح الآن...",
         Duration = 3
     })
     task.spawn(function()
@@ -163,11 +160,10 @@ BtnShells.MouseButton1Click:Connect(function()
     end)
 end)
 
--- 3. تجميع العملات (Auto Farm)
 BtnAutoFarm.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Auto Farm",
-        Text = "جاري جمع عملات الماب تلقائياً...",
+        Title = "جمع العملات",
+        Text = "تم تفعيل جمع العملات تلقائياً!",
         Duration = 2
     })
     task.spawn(function()
@@ -185,11 +181,10 @@ BtnAutoFarm.MouseButton1Click:Connect(function()
     end)
 end)
 
--- 4. كشف الأسرار (Role ESP)
 BtnRoleESP.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Role ESP",
-        Text = "تم كشف أدوار اللاعبين!",
+        Title = "كشف الأدوار",
+        Text = "تم كشف القاتل والشرطي بنجاح!",
         Duration = 2
     })
     task.spawn(function()
@@ -197,9 +192,9 @@ BtnRoleESP.MouseButton1Click:Connect(function()
             pcall(function()
                 for _, p in pairs(Players:GetPlayers()) do
                     if p ~= LocalPlayer and p.Character and p.Character:FindFirstChild("Head") then
-                        if not p.Character.Head:FindFirstChild("AmirESP") then
+                        if not p.Character.Head:FindFirstChild("AmirArabicESP") then
                             local bg = Instance.new("BillboardGui")
-                            bg.Name = "AmirESP"
+                            bg.Name = "AmirArabicESP"
                             bg.Size = UDim2.new(0, 70, 0, 25)
                             bg.StudsOffset = Vector3.new(0, 2.5, 0)
                             bg.AlwaysOnTop = true
@@ -221,7 +216,6 @@ BtnRoleESP.MouseButton1Click:Connect(function()
     end)
 end)
 
--- 5. جلب المسدس
 BtnBringGun.MouseButton1Click:Connect(function()
     pcall(function()
         for _, v in pairs(Workspace:GetDescendants()) do
@@ -232,10 +226,8 @@ BtnBringGun.MouseButton1Click:Connect(function()
     end)
 end)
 
--- 6. السرعة
 BtnSpeed.MouseButton1Click:Connect(function()
     pcall(function()
         LocalPlayer.Character.Humanoid.WalkSpeed = 120
     end)
 end)
-
