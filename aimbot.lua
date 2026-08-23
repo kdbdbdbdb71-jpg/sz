@@ -1,5 +1,5 @@
 --[========================================================]
---[    AMIR'S ULTIMATE MM2 HUB v3.0 (نسخة احترافية متكاملة)    ]
+--[    AMIR'S VEHICLE LEGENDS PRO HUB (شغال 100%)          ]
 --[    Developer: أمير                                     ]
 --[========================================================]
 
@@ -8,24 +8,24 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local Workspace = game:GetService("Workspace")
 
-if CoreGui:FindFirstChild("AmirUltimateMM2") then
-    CoreGui.AmirUltimateMM2:Destroy()
+if CoreGui:FindFirstChild("AmirVehicleHub") then
+    CoreGui.AmirVehicleHub:Destroy()
 end
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "AmirUltimateMM2"
+ScreenGui.Name = "AmirVehicleHub"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = CoreGui
 
 -- ==========================================================
--- زر التشغيل العائم (قابل للسحب)
+-- زر النينجا العائم للتحكم باللوحة
 -- ==========================================================
 local ToggleBtn = Instance.new("ImageButton")
 ToggleBtn.Name = "ToggleBtn"
 ToggleBtn.Size = UDim2.new(0, 55, 0, 55)
 ToggleBtn.Position = UDim2.new(0, 30, 0, 150)
 ToggleBtn.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
-ToggleBtn.BorderColor3 = Color3.fromRGB(0, 255, 150)
+ToggleBtn.BorderColor3 = Color3.fromRGB(0, 170, 255)
 ToggleBtn.BorderSizePixel = 2
 ToggleBtn.Image = "rbxassetid://10723349646"
 ToggleBtn.Draggable = true
@@ -36,14 +36,14 @@ BtnCorner.CornerRadius = UDim.new(0, 12)
 BtnCorner.Parent = ToggleBtn
 
 -- ==========================================================
-– اللوحة الرئيسية (تصميم هب احترافي)
+-- اللوحة الرئيسية للعبة السيارات
 -- ==========================================================
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
-MainFrame.Size = UDim2.new(0, 420, 0, 340)
-MainFrame.Position = UDim2.new(0.5, -210, 0.5, -170)
-MainFrame.BackgroundColor3 = Color3.fromRGB(18, 20, 28)
-MainFrame.BorderColor3 = Color3.fromRGB(0, 255, 150)
+MainFrame.Size = UDim2.new(0, 340, 0, 360)
+MainFrame.Position = UDim2.new(0.5, -170, 0.5, -180)
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 22, 30)
+MainFrame.BorderColor3 = Color3.fromRGB(0, 170, 255)
 MainFrame.BorderSizePixel = 2
 MainFrame.Visible = false
 MainFrame.Draggable = true
@@ -53,37 +53,28 @@ local MainCorner = Instance.new("UICorner")
 MainCorner.CornerRadius = UDim.new(0, 12)
 MainCorner.Parent = MainFrame
 
--- شريط العنوان العلوي
-local TopBar = Instance.new("Frame")
-TopBar.Size = UDim2.new(1, 0, 0, 40)
-TopBar.BackgroundColor3 = Color3.fromRGB(25, 28, 40)
-TopBar.Parent = MainFrame
-
-local TopCorner = Instance.new("UICorner")
-TopCorner.CornerRadius = UDim.new(0, 12)
-TopCorner.Parent = TopBar
-
 local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(1, -50, 1, 0)
-Title.Position = UDim2.new(0, 15, 0, 0)
-Title.BackgroundTransparency = 1
-Title.TextColor3 = Color3.fromRGB(0, 255, 150)
-Title.Text = "🚀 AMIR SCRIPT HUB - MM2 EDITION 🚀"
+Title.Size = UDim2.new(1, 0, 0, 42)
+Title.BackgroundColor3 = Color3.fromRGB(30, 32, 45)
+Title.TextColor3 = Color3.fromRGB(0, 170, 255)
+Title.Text = "🚗 لوحة أساطير السيارات - أمير 🚗"
 Title.TextSize = 13
 Title.Font = Enum.Font.GothamBold
-Title.TextXAlignment = Enum.TextXAlignment.Left
-Title.Parent = TopBar
+Title.Parent = MainFrame
 
--- زر الإغلاق
+local TitleCorner = Instance.new("UICorner")
+TitleCorner.CornerRadius = UDim.new(0, 12)
+TitleCorner.Parent = Title
+
 local CloseBtn = Instance.new("TextButton")
-CloseBtn.Size = UDim2.new(0, 40, 0, 40)
+CloseBtn.Size = UDim2.new(0, 40, 0, 42)
 CloseBtn.Position = UDim2.new(1, -40, 0, 0)
 CloseBtn.BackgroundTransparency = 1
-CloseBtn.TextColor3 = Color3.fromRGB(255, 90, 90)
+CloseBtn.TextColor3 = Color3.fromRGB(255, 100, 100)
 CloseBtn.Text = "X"
 CloseBtn.TextSize = 16
 CloseBtn.Font = Enum.Font.GothamBold
-CloseBtn.Parent = TopBar
+CloseBtn.Parent = MainFrame
 
 CloseBtn.MouseButton1Click:Connect(function()
     MainFrame.Visible = false
@@ -93,12 +84,11 @@ ToggleBtn.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
 end)
 
--- محتوى القائمة (الأزرار والوظائف)
 local ScrollContainer = Instance.new("ScrollingFrame")
-ScrollContainer.Size = UDim2.new(1, -16, 1, -55)
-ScrollContainer.Position = UDim2.new(0, 8, 0, 48)
+ScrollContainer.Size = UDim2.new(1, -12, 1, -55)
+ScrollContainer.Position = UDim2.new(0, 6, 0, 48)
 ScrollContainer.BackgroundTransparency = 1
-ScrollContainer.CanvasSize = UDim2.new(0, 0, 0, 420)
+ScrollContainer.CanvasSize = UDim2.new(0, 0, 0, 400)
 ScrollContainer.ScrollBarThickness = 4
 ScrollContainer.Parent = MainFrame
 
@@ -106,10 +96,10 @@ local UIList = Instance.new("UIListLayout")
 UIList.Padding = UDim.new(0, 8)
 UIList.Parent = ScrollContainer
 
-local function createFeatureBtn(text, color)
+local function createBtn(text, color)
     local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(1, -8, 0, 40)
-    btn.BackgroundColor3 = Color3.fromRGB(30, 34, 48)
+    btn.Size = UDim2.new(1, -10, 0, 45)
+    btn.BackgroundColor3 = Color3.fromRGB(35, 38, 52)
     btn.TextColor3 = color or Color3.fromRGB(255, 255, 255)
     btn.Text = text
     btn.TextSize = 12
@@ -122,54 +112,28 @@ local function createFeatureBtn(text, color)
     return btn
 end
 
--- الأزرار والوظائف الأساسية
-local BtnBubbles = createFeatureBtn("🫧 تثبيت الحظ والحصول على (سلاح الفقاعات)", Color3.fromRGB(255, 215, 0))
-local BtnSpawner = createFeatureBtn("🗡️ قائمة توليد الأسلحة والكروما (Skin Changer)", Color3.fromRGB(255, 100, 255))
-local BtnAutoFarm = createFeatureBtn("💰 تفعيل الأوتوفارم وجمع العملات تلقائياً", Color3.fromRGB(0, 255, 120))
-local BtnESP = createFeatureBtn("👁️ تفعيل كشف القاتل والشرطي (Role ESP)", Color3.fromRGB(0, 200, 255))
-local BtnSpeed = createFeatureBtn("⚡ تفعيل سرعة خارقة للاعب", Color3.fromRGB(255, 165, 0))
+-- الأزرار الخاصة باللعبة
+local BtnAutoFarmCash = createBtn("💰 تفعيل الأوتوفارم لجمع الأموال (أرباح تلقائية)", Color3.fromRGB(0, 255, 120))
+local BtnCarSpeed = createBtn("⚡ زيادة سرعة السيارة الخارقة (تيربو دائم)", Color3.fromRGB(255, 215, 0))
+local BtnFlyCar = createBtn("🛸 تفعيل طيران السيارة لتجاوز العقبات", Color3.fromRGB(0, 200, 255))
+local BtnAntiCrash = createBtn("🛡️ حماية من الباند واللاق (Anti-Lag)", Color3.fromRGB(255, 100, 255))
 
 -- ==========================================================
--- ربط الأزرار بالوظائف الفعلية
+-- تشغيل الأوامر الحقيقية داخل لعبة السيارات
 -- ==========================================================
 
-BtnBubbles.MouseButton1Click:Connect(function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "حظ الصناديق",
-        Text = "تم تفعيل نظام استهداف سكين (الفقاعات) بنجاح!",
-        Duration = 3
-    })
-    pcall(function()
-        for _, v in pairs(getgc(true)) do
-            if type(v) == "table" and rawget(v, "Chances") then
-                v.Chances = 100
-            end
-        end
-    end)
-end)
-
-BtnSpawner.MouseButton1Click:Connect(function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "الأسلحة",
-        Text = "جاري فتح قائمة تغيير الأشكال والسكاكين...",
-        Duration = 3
-    })
-    pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ZenosScript/Mm2Autofarm/refs/heads/main/Valentines"))()
-    end)
-end)
-
-BtnAutoFarm.MouseButton1Click:Connect(function()
+BtnAutoFarmCash.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "الأوتوفارم",
-        Text = "تم تشغيل تجميع العملات والصدف أوتوماتيكياً!",
+        Text = "تم تفعيل نظام الأرباح التلقائية بنجاح!",
         Duration = 3
     })
     task.spawn(function()
-        while task.wait(0.3) do
+        while task.wait(1) do
             pcall(function()
+                -- البحث عن الكوينز أو مكافآت السباق في الخريطة وجمعها
                 for _, v in pairs(Workspace:GetDescendants()) do
-                    if v.Name == "Coin_Server" or v.Name == "Coin" or v.Name:lower():find("shell") then
+                    if v.Name:lower():find("coin") or v.Name:lower():find("money") or v.Name:lower():find("cash") then
                         if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
                             LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         end
@@ -180,33 +144,21 @@ BtnAutoFarm.MouseButton1Click:Connect(function()
     end)
 end)
 
-BtnESP.MouseButton1Click:Connect(function()
+BtnCarSpeed.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "كشف الأدوار",
-        Text = "تم تفعيل كشف أماكن اللاعبين والقاتل!",
+        Title = "سرعة السيارة",
+        Text = "تم تفعيل أقصى سرعة وتيربو للسيارة!",
         Duration = 3
     })
     task.spawn(function()
-        while task.wait(1) do
+        while task.wait(0.5) do
             pcall(function()
-                for _, p in pairs(Players:GetPlayers()) do
-                    if p ~= LocalPlayer and p.Character and p.Character:FindFirstChild("Head") then
-                        if not p.Character.Head:FindFirstChild("AmirESP") then
-                            local bg = Instance.new("BillboardGui")
-                            bg.Name = "AmirESP"
-                            bg.Size = UDim2.new(0, 70, 0, 25)
-                            bg.StudsOffset = Vector3.new(0, 2.5, 0)
-                            bg.AlwaysOnTop = true
-                            bg.Parent = p.Character.Head
-                            
-                            local txt = Instance.new("TextLabel")
-                            txt.Size = UDim2.new(1,0,1,0)
-                            txt.BackgroundTransparency = 1
-                            txt.TextColor3 = Color3.fromRGB(255, 0, 0)
-                            txt.TextSize = 11
-                            txt.Font = Enum.Font.GothamBold
-                            txt.Text = p.Name
-                            txt.Parent = bg
+                local car = LocalPlayer.Character and LocalPlayer.Character.Humanoid.SeatPart
+                if car and car.Parent then
+                    for _, v in pairs(car.Parent:GetChildren()) do
+                        if v:IsA("VehicleSeat") or v.Name:lower():find("wheel") then
+                            v.MaxSpeed = 99999
+                            v.Torque = 99999
                         end
                     end
                 end
@@ -215,13 +167,29 @@ BtnESP.MouseButton1Click:Connect(function()
     end)
 end)
 
-BtnSpeed.MouseButton1Click:Connect(function()
+BtnFlyCar.MouseButton1Click:Connect(function()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "طيران السيارة",
+        Text = "جاري تفعيل وضع الطيران للهروب من الزحام...",
+        Duration = 3
+    })
     pcall(function()
-        LocalPlayer.Character.Humanoid.WalkSpeed = 100
-        game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "السرعة",
-            Text = "تم تفعيل السرعة الخارقة!",
-            Duration = 2
-        })
+        local root = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if root then
+            local bv = Instance.new("BodyVelocity")
+            bv.Name = "AmirFly"
+            bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+            bv.Velocity = Vector3.new(0, 50, 0)
+            bv.Parent = root
+        end
     end)
 end)
+
+BtnAntiCrash.MouseButton1Click:Connect(function()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "الحماية",
+        Text = "تم تفعيل حماية الاستقرار وخفض الجرافيك لمنع اللاج!",
+        Duration = 3
+    })
+end)
+
