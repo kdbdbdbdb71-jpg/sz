@@ -1,5 +1,5 @@
 --[========================================================]
---[    AMIR'S KICK & POWER SIMULATOR PRO HUB               ]
+--[    AMIR'S INTERNET CAFE TYCOON PRO HUB                  ]
 --[    Developer: أمير                                     ]
 --[========================================================]
 
@@ -7,26 +7,25 @@ local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local Workspace = game:GetService("Workspace")
-local VirtualUser = game:GetService("VirtualUser")
 
-if CoreGui:FindFirstChild("AmirKickSimulatorHub") then
-    CoreGui.AmirKickSimulatorHub:Destroy()
+if CoreGui:FindFirstChild("AmirInternetCafeHub") then
+    CoreGui.AmirInternetCafeHub:Destroy()
 end
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "AmirKickSimulatorHub"
+ScreenGui.Name = "AmirInternetCafeHub"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = CoreGui
 
 -- ==========================================================
--- زر النينجا العائم (قابل للسحب والإفلات)
+-- زر النينجا العائم للتحكم بالقائمة
 -- ==========================================================
 local ToggleBtn = Instance.new("ImageButton")
 ToggleBtn.Name = "ToggleBtn"
 ToggleBtn.Size = UDim2.new(0, 55, 0, 55)
 ToggleBtn.Position = UDim2.new(0, 30, 0, 150)
 ToggleBtn.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
-ToggleBtn.BorderColor3 = Color3.fromRGB(255, 100, 0)
+ToggleBtn.BorderColor3 = Color3.fromRGB(0, 255, 200)
 ToggleBtn.BorderSizePixel = 2
 ToggleBtn.Image = "rbxassetid://10723349646"
 ToggleBtn.Draggable = true
@@ -37,14 +36,14 @@ BtnCorner.CornerRadius = UDim.new(0, 12)
 BtnCorner.Parent = ToggleBtn
 
 -- ==========================================================
--- اللوحة الرئيسية بالعربي
+-- اللوحة الرئيسية بتصميم فخم وبالعربي
 -- ==========================================================
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
-MainFrame.Size = UDim2.new(0, 340, 0, 380)
-MainFrame.Position = UDim2.new(0.5, -170, 0.5, -190)
-MainFrame.BackgroundColor3 = Color3.fromRGB(20, 22, 30)
-MainFrame.BorderColor3 = Color3.fromRGB(255, 100, 0)
+MainFrame.Size = UDim2.new(0, 340, 0, 360)
+MainFrame.Position = UDim2.new(0.5, -170, 0.5, -180)
+MainFrame.BackgroundColor3 = Color3.fromRGB(18, 20, 28)
+MainFrame.BorderColor3 = Color3.fromRGB(0, 255, 200)
 MainFrame.BorderSizePixel = 2
 MainFrame.Visible = false
 MainFrame.Draggable = true
@@ -56,9 +55,9 @@ MainCorner.Parent = MainFrame
 
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1, 0, 0, 42)
-Title.BackgroundColor3 = Color3.fromRGB(30, 32, 45)
-Title.TextColor3 = Color3.fromRGB(255, 140, 0)
-Title.Text = "⚽ لوحة الركلات الخارقة - أمير ⚽"
+Title.BackgroundColor3 = Color3.fromRGB(25, 28, 40)
+Title.TextColor3 = Color3.fromRGB(0, 255, 200)
+Title.Text = "💻 لوحة مقهى الألعاب - أمير 💻"
 Title.TextSize = 13
 Title.Font = Enum.Font.GothamBold
 Title.Parent = MainFrame
@@ -89,7 +88,7 @@ local ScrollContainer = Instance.new("ScrollingFrame")
 ScrollContainer.Size = UDim2.new(1, -12, 1, -55)
 ScrollContainer.Position = UDim2.new(0, 6, 0, 48)
 ScrollContainer.BackgroundTransparency = 1
-ScrollContainer.CanvasSize = UDim2.new(0, 0, 0, 420)
+ScrollContainer.CanvasSize = UDim2.new(0, 0, 0, 400)
 ScrollContainer.ScrollBarThickness = 4
 ScrollContainer.Parent = MainFrame
 
@@ -100,7 +99,7 @@ UIList.Parent = ScrollContainer
 local function createBtn(text, color)
     local btn = Instance.new("TextButton")
     btn.Size = UDim2.new(1, -10, 0, 45)
-    btn.BackgroundColor3 = Color3.fromRGB(35, 38, 52)
+    btn.BackgroundColor3 = Color3.fromRGB(30, 34, 48)
     btn.TextColor3 = color or Color3.fromRGB(255, 255, 255)
     btn.Text = text
     btn.TextSize = 12
@@ -113,31 +112,30 @@ local function createBtn(text, color)
     return btn
 end
 
--- الأزرار الخاصة بماب الركلات وتجميع القوة
-local BtnAutoKick = createBtn("⚽ تفعيل الركل التلقائي (Auto Kick)", Color3.fromRGB(0, 255, 120))
-local BtnAutoTrain = createBtn("💪 زيادة القوة والتدريب تلقائياً (+1 Power)", Color3.fromRGB(255, 215, 0))
-local BtnClaimRewards = createBtn("🎁 استلام الهدايا والجوائز أوتوماتيك", Color3.fromRGB(0, 200, 255))
-local BtnFastSpeed = createBtn("⚡ تفعيل سرعة خارقة (WalkSpeed 100)", Color3.fromRGB(255, 100, 255))
-local BtnAntiAFK = createBtn("🛡️ منع الطرد بسبب الخمول (Anti-AFK)", Color3.fromRGB(200, 200, 200))
+-- الأزرار الخاصة بمقهى الألعاب
+local BtnAutoMoney = createBtn("💰 جمع الأرباح والأموال تلقائياً (Auto Cash)", Color3.fromRGB(0, 255, 120))
+local BtnFastPCs = createBtn("⚡ تفعيل سرعة العمل وتطوير الحواسيب", Color3.fromRGB(255, 215, 0))
+local BtnAutoCollect = createBtn("📥 تجمع الإيرادات من طاولات الزبائن", Color3.fromRGB(0, 200, 255))
+local BtnSuperSpeed = createBtn("🚀 سرعة خارقة للتنقل في المقهى", Color3.fromRGB(255, 100, 255))
 
 -- ==========================================================
--- تشغيل الوظائف البرمجية
+-- تشغيل الأوامر والوظائف للماب
 -- ==========================================================
 
--- 1. الركل التلقائي
-BtnAutoKick.MouseButton1Click:Connect(function()
+BtnAutoMoney.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "الركل التلقائي",
-        Text = "تم تفعيل الركل المتكرر بنجاح!",
+        Title = "الأموال التلقائية",
+        Text = "تم تفعيل نظام الأرباح الهائلة بنجاح!",
         Duration = 3
     })
     task.spawn(function()
-        while task.wait(0.1) do
+        while task.wait(0.5) do
             pcall(function()
-                -- محاكاة النقر للركل المستمر
-                for _, remote in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
-                    if remote:IsA("RemoteEvent") and (remote.Name:lower():find("kick") or remote.Name:lower():find("shoot") or remote.Name:lower():find("power")) then
-                        remote:FireServer()
+                -- البحث التلقائي عن الصناديق أو أزرار جمع الفلوس في المقهى
+                for _, v in pairs(Workspace:GetDescendants()) do
+                    if v:IsA("TouchTransmitter") and v.Parent and (v.Parent.Name:lower():find("cash") or v.Parent.Name:lower():find("money") or v.Parent.Name:lower():find("collect")) then
+                        firetouchinterest(LocalPlayer.Character.HumanoidRootPart, v.Parent, 0)
+                        firetouchinterest(LocalPlayer.Character.HumanoidRootPart, v.Parent, 1)
                     end
                 end
             end)
@@ -145,66 +143,49 @@ BtnAutoKick.MouseButton1Click:Connect(function()
     end)
 end)
 
--- 2. التدريب وزيادة القوة
-BtnAutoTrain.MouseButton1Click:Connect(function()
+BtnFastPCs.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "التدريب التلقائي",
-        Text = "جاري تجميع نقاط القوة بدون توقف...",
+        Title = "ترقية الأجهزة",
+        Text = "جاري تفعيل كفاءة وتطوير الحواسيب...",
         Duration = 3
     })
-    task.spawn(function()
-        while task.wait(0.2) do
-            pcall(function()
-                for _, remote in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
-                    if remote:IsA("RemoteEvent") and (remote.Name:lower():find("train") or remote.Name:lower():find("click") or remote.Name:lower():find("stat")) then
-                        remote:FireServer()
-                    end
-                end
-            end)
-        end
-    end)
-end)
-
--- 3. الهدايا
-BtnClaimRewards.MouseButton1Click:Connect(function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "الجوائز",
-        Text = "جاري فتح واستلام الهدايا المتاحة...",
-        Duration = 2
-    })
-    task.spawn(function()
-        pcall(function()
-            for _, remote in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
-                if remote:IsA("RemoteEvent") and (remote.Name:lower():find("reward") or remote.Name:lower():find("claim") or remote.Name:lower():find("gift")) then
-                    remote:FireServer()
-                end
-            end
-        end)
-    end)
-end)
-
--- 4. السرعة
-BtnFastSpeed.MouseButton1Click:Connect(function()
     pcall(function()
-        LocalPlayer.Character.Humanoid.WalkSpeed = 100
+        for _, remote in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+            if remote:IsA("RemoteEvent") and (remote.Name:lower():find("upgrade") or remote.Name:lower():find("buy") or remote.Name:lower():find("pc")) then
+                remote:FireServer()
+            end
+        end
+    end)
+end)
+
+BtnAutoCollect.MouseButton1Click:Connect(function()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "إيرادات الطاولات",
+        Text = "تم تفعيل جمع أرباح الزبائن أوتوماتيكياً!",
+        Duration = 3
+    })
+    task.spawn(function()
+        while task.wait(1) do
+            pcall(function()
+                for _, v in pairs(Workspace:GetDescendants()) do
+                    if v.Name:lower():find("income") or v.Name:lower():find("profit") then
+                        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                            LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+end)
+
+BtnSuperSpeed.MouseButton1Click:Connect(function()
+    pcall(function()
+        LocalPlayer.Character.Humanoid.WalkSpeed = 80
         game:GetService("StarterGui"):SetCore("SendNotification", {
             Title = "السرعة",
-            Text = "تم تفعيل السرعة الخارقة!",
+            Text = "تم تفعيل السرعة الخارقة لتطوير المقهى بسرعة!",
             Duration = 2
         })
-    end)
-end)
-
--- 5. منع الخمول
-BtnAntiAFK.MouseButton1Click:Connect(function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "حماية الخمول",
-        Text = "تم تفعيل منع الطرد (Anti-AFK) بنجاح!",
-        Duration = 3
-    })
-    LocalPlayer.Idled:Connect(function()
-        VirtualUser:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-        task.wait(1)
-        VirtualUser:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
     end)
 end)
